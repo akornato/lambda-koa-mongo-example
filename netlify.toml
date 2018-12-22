@@ -1,0 +1,17 @@
+[build]
+  functions = "./functions"
+
+[[redirects]]
+  from = "/zombies"
+  to = "/.netlify/functions/zombies"
+  status = 200
+
+[[redirects]]
+  from = "/zombies/*"
+  to = "/.netlify/functions/zombies/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/itemExchange"
+  to = "/.netlify/functions/itemExchange"
+  status = 200

@@ -1,0 +1,168 @@
+openapi: '3.0.0'
+info:
+  title: Zombies API
+  version: '0.1'
+servers:
+  - url: https://elastic-hugle-7307fd.netlify.com
+components:
+  parameters:
+    zombieId:
+      name: zombieId
+      in: path
+      required: true
+      schema:
+        type: string
+    itemId:
+      name: itemId
+      in: path
+      required: true
+      schema:
+        type: string
+  schemas:
+    zombie:
+      type: object
+      required:
+        - id
+        - name
+        - items
+        - totalItemWorth
+        - created_at
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        items:
+          type: array
+          items:
+            type: integer
+        totalItemWorth:
+          type: integer
+        created_at:
+          type: string
+    zombieInput:
+      type: object
+      properties:
+        name:
+          type: string
+        items:
+          type: array
+          items:
+            type: integer
+paths:
+  /zombies:
+    get:
+      summary: getAllZombies
+      responses:
+        '200':
+          description: array of zombies
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - id
+                    - name
+                  properties:
+                    id:
+                      type: string
+                    name:
+                      type: string
+    post:
+      summary: createZombie
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/zombieInput'
+      responses:
+        '200':
+          description: zombie created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/zombie'
+        '400':
+          description: name is required         
+  /zombies/{zombieId}:
+    put:
+      summary: updateZombie
+      parameters:
+        - $ref: '#/components/parameters/zombieId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/zombieInput'
+      responses:
+        '200':
+          description: zombie updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/zombie'
+        '404':
+          description: zombie not found
+    delete:
+      summary: deleteZombie
+      parameters:
+        - $ref: '#/components/parameters/zombieId'
+      responses:
+        '200':
+          description: zombie deleted
+    get:
+      summary: getOneZombie
+      parameters:
+        - $ref: '#/components/parameters/zombieId'
+      responses:
+        '200':
+          description: zombie found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/zombie'
+        '404':
+          description: zombie not found
+  /zombies/{zombieId}/items:
+    get:
+      summary: getAllZombieItems
+      parameters:
+        - $ref: '#/components/parameters/zombieId'
+      responses:
+        '200':
+          description: array of zombie items
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: integer
+        '404':
+          description: zombie not found
+  /zombies/{zombieId}/items/{itemId}:
+    post:
+      summary: addZombieItem
+      parameters:
+        - $ref: '#/components/parameters/zombieId'
+        - $ref: '#/components/parameters/itemId'
+      responses:
+        '200':
+          description: item added
+        '400':
+          description: zombie already has maximum 5 items
+        '404':
+          description: zombie not found
+    delete:
+      summary: deleteZombieItem
+      parameters:
+        - $ref: '#/components/parameters/zombieId'
+        - $ref: '#/components/parameters/itemId'
+      responses:
+        '200':
+          description: item deleted
+        '404':
+          description: zombie not found
