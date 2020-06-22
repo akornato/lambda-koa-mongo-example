@@ -3,7 +3,7 @@ info:
   title: Zombies API
   version: '0.1'
 servers:
-  - url: https://elastic-hugle-7307fd.netlify.com
+  - url: https://elastic-hugle-7307fd.netlify.app
 components:
   parameters:
     zombieId:

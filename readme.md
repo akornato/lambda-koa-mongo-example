@@ -6,11 +6,11 @@ The API is deployed as 'zombies' lambda and it caches hits to another 'itemExcha
 
 ## Docs
 
-[Swagger UI](https://elastic-hugle-7307fd.netlify.com)
+[Swagger UI](https://elastic-hugle-7307fd.netlify.app)
 
 ## CI/CD
 
-- Mocha/Chai/Sinon/Nock tests with [coverage](https://elastic-hugle-7307fd.netlify.com/coverage/lcov-report/index.html) + build + deploy on AWS Lambda via Netlify Functions.
+- Mocha/Chai/Sinon/Nock tests with [coverage](https://elastic-hugle-7307fd.netlify.app/coverage/lcov-report/index.html) + build + deploy on AWS Lambda via Netlify Functions.
 
 ## Built with
 
